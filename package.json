@@ -1,0 +1,29 @@
+{
+  "name": "git-test",
+  "version": "1.0.0",
+  "description": "\"Este es un proyecto con git y node\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run lite",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lite": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cesaramendi/git-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cesaramendi/git-test/issues"
+  },
+  "homepage": "https://github.com/cesaramendi/git-test#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.12.9"
+  }
+}
