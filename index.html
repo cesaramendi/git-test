@@ -39,6 +39,9 @@
 				<div class="col-12 col-sm align-self-center">
 					<img src="img/logo.png" class="img-fluid" width="100">
 				</div>
+				<div class="col-12 col-sm align-self-center">
+					<a href="#reserve-table" class="btn btn-warning">Reserve Table</a>
+				</div>
 			</div>
 		</div>
 	</header>
@@ -64,7 +67,7 @@
 				<h3>This Month's Promoions</h3>
 			</div>
 			<div class="col ">
-				<h2>Weekend Grand Buffet</h2>
+				<h2>Weekend Grand Buffet <span class="badge badge-danger">NEW</span></h2>
 				<p>bla bla bla</p>
 			</div>
 		</div>
@@ -75,12 +78,50 @@
 			</div>
 			<div class="col col-sm order-sm-first col-md">
 				<div class="media">
-					<img class="d-flex mr-3 img.trumbnail align-self-center" src="img/cesar.jpg" alt="Cesar Nieves" height="100">
+					<img class="d-flex mr-3 img-trumbnail align-self-center" src="img/cesar.jpg" alt="Cesar Nieves" height="100">
 					<div class="media-body">
 						<h2 class="mt-0">Cesar Nieves</h2>
 						<h4>Executive Chef</h4>
 						<p class="d-none d-sm-block">Award wining three-star Michelin</p>
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row row-content justify-content-center align-items-center">
+			<div class="col-md-8">
+				<div class="card" id="reserve-table">
+					<h3 class="card-header bg-warning text-white">Reserve a Table</h3>
+					<div class="card-body">
+						<footer>
+							<div class="form-group row">
+								<label class="col-sm-5">Number of Guests</label>
+								<div class="col-sm-7">
+									<input type="radio" name="radio-one">1
+									<input type="radio" name="radio-two">2
+									<input type="radio" name="radio-three">3
+									<input type="radio" name="radio-four">4
+									<input type="radio" name="radio-five">5
+									<input type="radio" name="radio-six">6
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-5">Date and Rine</label>
+								<div class="col-sm-7">
+									<input type="Date" name="date-reserve">
+									<input type="Time" name="tme-reserve">
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="offset-md-2 col-sm">
+									<button class="btn btn-primary">
+										Reserve
+									</button>
+								</div>
+							</div>
+						</footer>
+					</div>
+					
 				</div>
 			</div>
 		</div>
