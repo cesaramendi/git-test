@@ -97,24 +97,31 @@
 
 		<div class="row row-content align-items-center">
 			<div class="col-12">
-				<h2>Cprporate Leadership</h2>
-				<ul class="nav nav-tabs">
-					<li class="nav-item"><a class="nav-link active" href="#cesar" role="tab" data-toggle="tab">Cesar N, aramendi</a></li>
-					<li class="nav-item"><a class="nav-link" href="#fulano" role="tab" data-toggle="tab">Fulano De Tal</a></li>
-					<li class="nav-item"><a class="nav-link" href="#geranio" role="tab" data-toggle="tab">Geranio Sanchez</a></li>
-				</ul>
-				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane face show active" id="cesar">
-						<h3>Cesar Nieves</h3>
-						<p>texto aqui</p>
+				<h2>Corporate Leadership</h2>
+				<div id="accordion">
+					<div class="card">
+						<div class="card-header" role="tad" id="cesarhead">
+							<h3 class="mb-0"><a href="" data-toggle="collapse" data-target="#cesar">Cesar Nieves <small>Chief Epicurious Officer</small></a></h3>
+						</div>
+						<div role="tabpanel" class="collapse show card-body" id="cesar" data-parent="#accordion">
+							<p>texto aqui de cesar</p>
+						</div>
 					</div>
-					<div role="tabpanel" class="tab-pane face" id="fulano">
-						<h3>Fulano de tal</h3>
-						<p>texto aqui</p>
+					<div class="card">
+						<div class="card-header">
+							<h3 class="mb-0"><a href="" data-toggle="collapse" data-target="#fulano">Fulano de tal</a></h3>
+						</div>
+						<div role="tabpanel" class="collapse card-body" id="fulano" data-parent="#accordion">
+							<p>texto aqui de fulano</p>
+						</div>
 					</div>
-					<div role="tabpanel" class="tab-pane face" id="geranio">
-						<h3>Geranio Sanchez</h3>
-						<p>texto aqui</p>
+					<div class="card">
+						<div class="card-header">
+							<h3 class="mb-0"><a href="" data-toggle="collapse" data-target="#geranio">Geranio Sanchez</a></h3>
+						</div>
+						<div role="tabpanel" class="collapse card-body" id="geranio" data-parent="#accordion">
+							<p>texto aqui de geranio</p>
+						</div>
 					</div>
 				</div>
 			</div>
