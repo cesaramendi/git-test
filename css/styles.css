@@ -44,3 +44,20 @@ body{
 	border-bottom: 1px solid #DDD;
 	padding: 10px;
 }
+
+.carousel{
+	margin: 0px auto;
+	background: #512DA8;
+}
+
+.carousel-item{
+	height: 300px;
+}
+
+.carousel-item img{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	min-height: 300px;
+	max-height: 300px;
+}
