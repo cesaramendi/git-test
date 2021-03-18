@@ -731,3 +731,93 @@ Next, update the *Grunt.js*:
 Now if you run Grunt, it will create a dist folder with the files structured correctly to be distributed to a server to host your website. To do this, type the following at the prompt:
 
 	grunt build
+
+
+## Gulp Part 1
+
+Install Gulp CLI and Gulp plugins in your project
+Configure a Gulp file with a set of tasks to build a web project from a source, and serve the built project using a server.
+
+### Installing Gulp
+	
+At the command prompt, type the following to install Gulp command-line interface (CLI) globally:
+
+	npm install -g gulp-cli@2.0.1
+
+Next install Gulp to use within your project. To do this, go to the folder and type the following at the prompt:
+
+	npm install gulp@3.9.1 --save-dev
+
+### Install Gulp Plugins for SASS and Browser-Sync
+
+Install all the Gulp plugins that you will need for this exercise. To do this, type the following at the command prompt
+
+	npm install gulp-sass@3.1.0  browser-sync@2.23.6 --save-dev
+
+### Creating a Gulp File
+
+Next you need to create a Gulp file containing the tasks to be run when you use Gulp. To do this, create a file named gulpfile.js in the conFusion folder.
+
+### Loading Gulp Plugins
+
+Load in all the Gulp plugins by including the following code in the Gulp file
+
+	'use strict';
+	var gulp = require('gulp'),
+	    sass = require('gulp-sass'),
+	    browserSync = require('browser-sync');
+
+### Adding Gulp Tasks for SASS and Browser-Sync
+
+	gulp.task('sass', function () {
+	  return gulp.src('./css/*.scss')
+	    .pipe(sass().on('error', sass.logError))
+	    .pipe(gulp.dest('./css'));
+	});
+	gulp.task('sass:watch', function () {
+	  gulp.watch('./css/*.scss', ['sass']);
+	});
+	gulp.task('browser-sync', function () {
+	   var files = [
+	      './*.html',
+	      './css/*.css',
+	      './img/*.{png,jpg,gif}',
+	      './js/*.js'
+	   ];
+	   browserSync.init(files, {
+	      server: {
+	         baseDir: "./"
+	      }
+	   });
+	});
+	// Default task
+	gulp.task('default', ['browser-sync'], function() {
+	    gulp.start('sass:watch');
+	});
+
+### Running the Gulp Tasks
+
+At the command prompt, if you type gulp it will run the default task:
+
+	gulp
+
+### How to fix ReferenceError
+
+For error:
+
+	$ gulp
+	fs.js:45
+	} = primordials;
+	    ^
+
+Fix:
+
+In the same directory where you have `package.json` create a `npm-shrinkwrap.json` file with the following contents:
+
+    {
+      "dependencies": {
+        "graceful-fs": {
+            "version": "4.2.2"
+         }
+      }
+    }
