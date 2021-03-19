@@ -459,8 +459,8 @@ Next, add the following code to Gruntfile.js to set up the file to configure Gru
 
 ### Compiling SCSS to CSS
 
-	npm install grunt-sass@2.1.0 --save-dev
-	npm install time-grunt@1.4.0 --save-dev
+	npm install grunt-sass@3.1.0 --save-dev
+	npm install time-grunt@2.0.0 --save-dev
 	npm install jit-grunt@0.10.0 --save-dev
 
 configure the SASS task in the Gruntfile as follows, by including the code inside the function in Gruntfile.js:
@@ -534,7 +534,7 @@ Configure a Grunt file with a set of tasks to build your web project from a sour
 ### Copying the Files and Cleaning Up the Dist Folder
 
 	npm install grunt-contrib-copy@1.0.0 --save-dev
-	npm install grunt-contrib-clean@1.1.0 --save-dev
+	npm install grunt-contrib-clean@2.0.0 --save-dev
 
 ### Compressing and Minifying Images
 
@@ -543,9 +543,9 @@ Configure a Grunt file with a set of tasks to build your web project from a sour
 ### Preparing the Distribution Folder and Files
 
 	 npm install grunt-contrib-concat@1.0.1 --save-dev
-	 npm install grunt-contrib-cssmin@2.2.1 --save-dev
-	 npm install grunt-contrib-htmlmin@2.4.0 --save-dev
-	 npm install grunt-contrib-uglify@3.3.0 --save-dev
+	 npm install grunt-contrib-cssmin@4.0.0 --save-dev
+	 npm install grunt-contrib-htmlmin@3.1.0 --save-dev
+	 npm install grunt-contrib-uglify@5.0.0 --save-dev
 	 npm install grunt-filerev@2.3.1 --save-dev
 	 npm install grunt-usemin@3.1.1 --save-dev
 
@@ -821,3 +821,90 @@ In the same directory where you have `package.json` create a `npm-shrinkwrap.jso
          }
       }
     }
+
+Run `npm intall`
+
+## Gulp Part 2
+
+Configure the Gulp file with a set of tasks to build the distribution folder for the web project.
+
+### Copying the Files and Cleaning up the Dist Folder
+
+We will now create the tasks for copying the font files and cleaning up the distribution folder. To do this we will first install the del Node module and require it in the Gulp file as follows:
+
+	npm install del@3.0.0 --save-dev
+
+
+	var ...
+	    del = require('del'),
+	    ...
+
+Next, we will add the code for the Clean task and the copyfonts task as follows:
+
+	// Clean
+	gulp.task('clean', function() {
+	    return del(['dist']);
+	});
+	gulp.task('copyfonts', function() {
+	   gulp.src('./node_modules/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
+	   .pipe(gulp.dest('./dist/fonts'));
+	});
+
+### Compressing and Minifying Images
+
+We will now install the gulp-imagemin plugin and configure the imagemin task. To do this we install the plugin and require it as follows:
+
+	npm install gulp-imagemin@4.1.0 --save-dev
+
+	var ...
+    imagemin = require('gulp-imagemin'),
+    ...
+
+Next, we create the imagemin task as follows:
+
+	// Images
+	gulp.task('imagemin', function() {
+	  return gulp.src('img/*.{png,jpg,gif}')
+	    .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
+	    .pipe(gulp.dest('dist/img'));
+	});
+
+### Preparing the Distribution Folder and Files
+
+We now install the gulp-usemin and other related Gulp plugins and require them as follows:
+
+	npm install gulp-uglify@3.0.0 gulp-usemin@0.3.29 gulp-rev@8.1.1 gulp-clean-css@3.9.3 gulp-flatmap@1.0.2 gulp-htmlmin@4.0.0 --save-dev
+
+	var ...
+	    uglify = require('gulp-uglify'),
+	    usemin = require('gulp-usemin'),
+	    rev = require('gulp-rev'),
+	    cleanCss = require('gulp-clean-css'),
+	    flatmap = require('gulp-flatmap'),
+	    htmlmin = require('gulp-htmlmin');
+
+We configure the usemin and the build task as follows:
+
+	gulp.task('usemin', function() {
+	  return gulp.src('./*.html')
+	  .pipe(flatmap(function(stream, file){
+	      return stream
+	        .pipe(usemin({
+	            css: [ rev() ],
+	            html: [ function() { return htmlmin({ collapseWhitespace: true })} ],
+	            js: [ uglify(), rev() ],
+	            inlinejs: [ uglify() ],
+	            inlinecss: [ cleanCss(), 'concat' ]
+	        }))
+	    }))
+	    .pipe(gulp.dest('dist/'));
+	});
+	gulp.task('build',['clean'], function() {
+	    gulp.start('copyfonts','imagemin','usemin');
+	});
+
+### Running the Gulp Tasks
+
+At the command prompt, if you type gulp build it will run the build task:
+
+	gulp build
